@@ -9,7 +9,7 @@
 #
 
 from __future__ import print_function, division, absolute_import, unicode_literals
-from grako.parsing import * # @UnusedWildImport
+from grako.parsing import graken, Parser  # @UnusedWildImport
 from grako.exceptions import * # @UnusedWildImport
 
 __version__ = '13.297.14.02.27'
@@ -19,7 +19,7 @@ class WktParser(Parser):
         super(WktParser, self).__init__(whitespace=whitespace,
             nameguard=nameguard, **kwargs)
 
-    @rule_def
+    @graken()
     def _well_known_text_representation_(self):
         with self._choice():
             with self._option():
@@ -32,14 +32,14 @@ class WktParser(Parser):
                 self._collection_text_representation_()
             self._error('no available options')
 
-    @rule_def
+    @graken()
     def _point_text_representation_(self):
         self._token('POINT')
         with self._optional():
             self._z_m_()
         self._point_text_()
 
-    @rule_def
+    @graken()
     def _curve_text_representation_(self):
         with self._choice():
             with self._option():
@@ -50,32 +50,32 @@ class WktParser(Parser):
                 self._compoundcurve_text_representation_()
             self._error('no available options')
 
-    @rule_def
+    @graken()
     def _linestring_text_representation_(self):
         self._token('LINESTRING')
         with self._optional():
             self._z_m_()
         self._linestring_text_body_()
 
-    @rule_def
+    @graken()
     def _circularstring_text_representation_(self):
         self._token('CIRCULARSTRING')
         with self._optional():
             self._z_m_()
         self._circularstring_text_()
 
-    @rule_def
+    @graken()
     def _compoundcurve_text_representation_(self):
         self._token('COMPOUNDCURVE')
         with self._optional():
             self._z_m_()
         self._compoundcurve_text_()
 
-    @rule_def
+    @graken()
     def _surface_text_representation_(self):
         self._curvepolygon_text_representation_()
 
-    @rule_def
+    @graken()
     def _curvepolygon_text_representation_(self):
         with self._choice():
             with self._option():
@@ -89,21 +89,21 @@ class WktParser(Parser):
                 self._triangle_text_representation_()
             self._error('no available options')
 
-    @rule_def
+    @graken()
     def _polygon_text_representation_(self):
         self._token('POLYGON')
         with self._optional():
             self._z_m_()
         self._polygon_text_body_()
 
-    @rule_def
+    @graken()
     def _triangle_text_representation_(self):
         self._token('TRIANGLE')
         with self._optional():
             self._z_m_()
         self._triangle_text_body_()
 
-    @rule_def
+    @graken()
     def _collection_text_representation_(self):
         with self._choice():
             with self._option():
@@ -116,14 +116,14 @@ class WktParser(Parser):
                 self._geometrycollection_text_representation_()
             self._error('no available options')
 
-    @rule_def
+    @graken()
     def _multipoint_text_representation_(self):
         self._token('MULTIPOINT')
         with self._optional():
             self._z_m_()
         self._multipoint_text_()
 
-    @rule_def
+    @graken()
     def _multicurve_text_representation_(self):
         with self._choice():
             with self._option():
@@ -135,14 +135,14 @@ class WktParser(Parser):
                 self._multilinestring_text_representation_()
             self._error('no available options')
 
-    @rule_def
+    @graken()
     def _multilinestring_text_representation_(self):
         self._token('MULTILINESTRING')
         with self._optional():
             self._z_m_()
         self._multilinestring_text_()
 
-    @rule_def
+    @graken()
     def _multisurface_text_representation_(self):
         with self._choice():
             with self._option():
@@ -158,51 +158,51 @@ class WktParser(Parser):
                 self._tin_text_representation_()
             self._error('no available options')
 
-    @rule_def
+    @graken()
     def _multipolygon_text_representation_(self):
         self._token('MULTIPOLYGON')
         with self._optional():
             self._z_m_()
         self._multipolygon_text_()
 
-    @rule_def
+    @graken()
     def _polyhedralsurface_text_representation_(self):
         self._token('POLYHEDRALSURFACE')
         with self._optional():
             self._z_m_()
         self._polyhedralsurface_text_()
 
-    @rule_def
+    @graken()
     def _tin_text_representation_(self):
         self._token('TIN')
         with self._optional():
             self._z_m_()
         self._tin_text_()
 
-    @rule_def
+    @graken()
     def _geometrycollection_text_representation_(self):
         self._token('GEOMETRYCOLLECTION')
         with self._optional():
             self._z_m_()
         self._geometrycollection_text_()
 
-    @rule_def
+    @graken()
     def _linestring_text_body_(self):
         self._linestring_text_()
 
-    @rule_def
+    @graken()
     def _curvepolygon_text_body_(self):
         self._curvepolygon_text_()
 
-    @rule_def
+    @graken()
     def _polygon_text_body_(self):
         self._polygon_text_()
 
-    @rule_def
+    @graken()
     def _triangle_text_body_(self):
         self._triangle_text_()
 
-    @rule_def
+    @graken()
     def _point_text_(self):
         with self._choice():
             with self._option():
@@ -213,7 +213,7 @@ class WktParser(Parser):
                 self._right_paren_()
             self._error('no available options')
 
-    @rule_def
+    @graken()
     def _point_(self):
         self._x_()
         self._y_()
@@ -222,23 +222,23 @@ class WktParser(Parser):
         with self._optional():
             self._m_()
 
-    @rule_def
+    @graken()
     def _x_(self):
         self._number_()
 
-    @rule_def
+    @graken()
     def _y_(self):
         self._number_()
 
-    @rule_def
+    @graken()
     def _z_(self):
         self._number_()
 
-    @rule_def
+    @graken()
     def _m_(self):
         self._number_()
 
-    @rule_def
+    @graken()
     def _linestring_text_(self):
         with self._choice():
             with self._option():
@@ -253,7 +253,7 @@ class WktParser(Parser):
                 self._right_paren_()
             self._error('no available options')
 
-    @rule_def
+    @graken()
     def _circularstring_text_(self):
         with self._choice():
             with self._option():
@@ -268,7 +268,7 @@ class WktParser(Parser):
                 self._right_paren_()
             self._error('no available options')
 
-    @rule_def
+    @graken()
     def _compoundcurve_text_(self):
         with self._choice():
             with self._option():
@@ -283,7 +283,7 @@ class WktParser(Parser):
                 self._right_paren_()
             self._error('no available options')
 
-    @rule_def
+    @graken()
     def _single_curve_text_(self):
         with self._choice():
             with self._option():
@@ -292,7 +292,7 @@ class WktParser(Parser):
                 self._circularstring_text_representation_()
             self._error('no available options')
 
-    @rule_def
+    @graken()
     def _curve_text_(self):
         with self._choice():
             with self._option():
@@ -303,7 +303,7 @@ class WktParser(Parser):
                 self._compoundcurve_text_representation_()
             self._error('no available options')
 
-    @rule_def
+    @graken()
     def _ring_text_(self):
         with self._choice():
             with self._option():
@@ -314,7 +314,7 @@ class WktParser(Parser):
                 self._compoundcurve_text_representation_()
             self._error('no available options')
 
-    @rule_def
+    @graken()
     def _surface_text_(self):
         with self._choice():
             with self._option():
@@ -324,7 +324,7 @@ class WktParser(Parser):
                 self._polygon_text_body_()
             self._error('no available options')
 
-    @rule_def
+    @graken()
     def _curvepolygon_text_(self):
         with self._choice():
             with self._option():
@@ -339,7 +339,7 @@ class WktParser(Parser):
                 self._right_paren_()
             self._error('no available options')
 
-    @rule_def
+    @graken()
     def _polygon_text_(self):
         with self._choice():
             with self._option():
@@ -354,7 +354,7 @@ class WktParser(Parser):
                 self._right_paren_()
             self._error('no available options')
 
-    @rule_def
+    @graken()
     def _triangle_text_(self):
         with self._choice():
             with self._option():
@@ -365,7 +365,7 @@ class WktParser(Parser):
                 self._right_paren_()
             self._error('no available options')
 
-    @rule_def
+    @graken()
     def _multipoint_text_(self):
         with self._choice():
             with self._option():
@@ -380,7 +380,7 @@ class WktParser(Parser):
                 self._right_paren_()
             self._error('no available options')
 
-    @rule_def
+    @graken()
     def _multicurve_text_(self):
         with self._choice():
             with self._option():
@@ -395,7 +395,7 @@ class WktParser(Parser):
                 self._right_paren_()
             self._error('no available options')
 
-    @rule_def
+    @graken()
     def _multilinestring_text_(self):
         with self._choice():
             with self._option():
@@ -410,7 +410,7 @@ class WktParser(Parser):
                 self._right_paren_()
             self._error('no available options')
 
-    @rule_def
+    @graken()
     def _multisurface_text_(self):
         with self._choice():
             with self._option():
@@ -425,7 +425,7 @@ class WktParser(Parser):
                 self._right_paren_()
             self._error('no available options')
 
-    @rule_def
+    @graken()
     def _multipolygon_text_(self):
         with self._choice():
             with self._option():
@@ -440,7 +440,7 @@ class WktParser(Parser):
                 self._right_paren_()
             self._error('no available options')
 
-    @rule_def
+    @graken()
     def _polyhedralsurface_text_(self):
         with self._choice():
             with self._option():
@@ -455,7 +455,7 @@ class WktParser(Parser):
                 self._right_paren_()
             self._error('no available options')
 
-    @rule_def
+    @graken()
     def _tin_text_(self):
         with self._choice():
             with self._option():
@@ -470,7 +470,7 @@ class WktParser(Parser):
                 self._right_paren_()
             self._error('no available options')
 
-    @rule_def
+    @graken()
     def _geometrycollection_text_(self):
         with self._choice():
             with self._option():
@@ -485,11 +485,11 @@ class WktParser(Parser):
                 self._right_paren_()
             self._error('no available options')
 
-    @rule_def
+    @graken()
     def _empty_set_(self):
         self._token('EMPTY')
 
-    @rule_def
+    @graken()
     def _z_m_(self):
         with self._choice():
             with self._option():
@@ -500,26 +500,26 @@ class WktParser(Parser):
                 self._token('M')
             self._error('expecting one of: Z ZM M')
 
-    @rule_def
+    @graken()
     def _left_paren_(self):
         self._token('(')
 
-    @rule_def
+    @graken()
     def _right_paren_(self):
         self._token(')')
 
-    @rule_def
+    @graken()
     def _number_(self):
         self._pattern(r'[+-]?(\d+(\.\d*)?|\.\d+)([eE][+-]?\d+)?')
 
-    @rule_def
+    @graken()
     def _comma_(self):
         self._token(',')
 
 
 
-class WktSemanticParser(CheckSemanticsMixin, WktParser):
-    pass
+# class WktSemanticParser(CheckSemanticsMixin, WktParser):
+#     pass
 
 
 class WktSemantics(object):
